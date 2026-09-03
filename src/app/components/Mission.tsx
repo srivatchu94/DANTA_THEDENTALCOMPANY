@@ -1,5 +1,5 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Target, Zap, Users, CheckCircle2, Award, Heart, Shield } from "lucide-react";
+import { Target, Zap, Users, CheckCircle2, Award, Star, Shield } from "lucide-react";
 
 const features = [
   {
@@ -83,10 +83,10 @@ export function Mission() {
             {/* Floating stats */}
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl px-8 py-5 shadow-xl border border-[#e5d9cf] flex items-center gap-8 hover:scale-105 transition-transform duration-300 cursor-pointer whitespace-nowrap">
               <div className="flex items-center gap-3">
-                <Heart className="w-6 h-6 text-[#7c2d3e] fill-[#7c2d3e]" />
+                <Star className="w-6 h-6 text-[#7c2d3e] fill-[#7c2d3e]" />
                 <div>
-                  <p className="text-xl text-[#c4975a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>15K+</p>
-                  <p className="text-[10px] text-[#8a7060] uppercase tracking-wider">Satisfied Patients</p>
+                  <p className="text-xl text-[#c4975a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>5.0</p>
+                  <p className="text-[10px] text-[#8a7060] uppercase tracking-wider">Patient Rating</p>
                 </div>
               </div>
               <div className="w-px h-10 bg-[#e5d9cf]" />

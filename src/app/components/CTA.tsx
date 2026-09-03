@@ -1,6 +1,9 @@
 import { Calendar, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useBookingModal } from "./BookingModalContext";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_EMAIL } from "./contact-info";
 
 export function CTA() {
+  const { openModal } = useBookingModal();
   return (
     <section id="contact" className="relative py-28 overflow-hidden bg-[#2a1f1a]">
       {/* Decorative background */}
@@ -31,21 +34,21 @@ export function CTA() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-14">
-              <button className="group relative overflow-hidden bg-[#c4975a] text-white px-9 py-4 rounded-xl shadow-lg hover:shadow-[#c4975a]/30 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3">
+              <button onClick={openModal} className="group relative overflow-hidden bg-[#c4975a] text-white px-9 py-4 rounded-xl shadow-lg hover:shadow-[#c4975a]/30 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#b8844a] to-[#d4a86a] opacity-0 group-hover:opacity-100 transition-opacity" />
                 <Calendar className="w-5 h-5 relative z-10 group-hover:rotate-6 transition-transform duration-300" />
                 <span className="relative z-10 text-sm tracking-wide">Schedule Appointment</span>
               </button>
-              <button className="group border border-[#c4975a]/40 text-[#d4b896] px-9 py-4 rounded-xl hover:border-[#c4975a] hover:bg-[#c4975a]/10 transition-all duration-300 flex items-center justify-center gap-3">
+              <a href={CONTACT_PHONE_TEL} className="group border border-[#c4975a]/40 text-[#d4b896] px-9 py-4 rounded-xl hover:border-[#c4975a] hover:bg-[#c4975a]/10 transition-all duration-300 flex items-center justify-center gap-3">
                 <Phone className="w-5 h-5 group-hover:rotate-6 transition-transform duration-300" />
                 <span className="text-sm tracking-wide">Call Us Now</span>
-              </button>
+              </a>
             </div>
 
             {/* Stats row */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { value: "15K+", label: "Happy Patients" },
+                { value: "5.0", label: "Patient Rating" },
                 { value: "6+", label: "Years Exp." },
                 { value: "98%", label: "Satisfaction" },
                 { value: "50+", label: "Specialists" },
@@ -75,8 +78,8 @@ export function CTA() {
               <div className="space-y-3">
                 {[
                   { icon: MapPin, label: "Location", value: "S.No.271/15, 2/387A, First Floor, Sathyavani Muthu Street, Gerugambakkam Main Road, Chennai – 600128", accent: "#c4975a" },
-                  { icon: Phone, label: "Phone", value: "+91 80560 10278", accent: "#7c2d3e" },
-                  { icon: Mail, label: "Email", value: "info@danta.com", accent: "#b5a090" },
+                  { icon: Phone, label: "Phone", value: CONTACT_PHONE_DISPLAY, accent: "#7c2d3e" },
+                  { icon: Mail, label: "Email", value: CONTACT_EMAIL, accent: "#b5a090" },
                 ].map(({ icon: Icon, label, value, accent }, i) => (
                   <div key={i} className="group/item flex items-start gap-4 p-4 rounded-xl hover:bg-[#f3ece4] transition-colors duration-200 cursor-pointer">
                     <div

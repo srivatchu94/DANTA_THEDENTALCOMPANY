@@ -1,8 +1,9 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Calendar, TrendingUp, Crown, Users, ArrowRight } from "lucide-react";
-// Users already imported for the floating card
+import { Calendar, TrendingUp, Crown, Star, ArrowRight } from "lucide-react";
+import { useBookingModal } from "./BookingModalContext";
 
 export function Hero() {
+  const { openModal } = useBookingModal();
   return (
     <section id="home" className="relative overflow-hidden bg-[#faf5ef] pt-40 pb-24">
       {/* Subtle warm background orbs */}
@@ -23,7 +24,7 @@ export function Hero() {
                   <div key={i} className="w-6 h-6 rounded-full border-2 border-white" style={{ backgroundColor: c }} />
                 ))}
               </div>
-              <span className="text-xs text-[#8a7060] tracking-wide">Trusted by 15,000+ Happy Patients</span>
+              <span className="text-xs text-[#8a7060] tracking-wide">Bespoke Dental Artistry in Chennai</span>
               <div className="w-1.5 h-1.5 rounded-full bg-[#c4975a]" />
             </div>
 
@@ -41,7 +42,7 @@ export function Hero() {
 
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
-              <button className="group relative overflow-hidden bg-[#2a1f1a] text-[#d4b896] px-9 py-4 rounded-xl shadow-lg hover:shadow-[#2a1f1a]/30 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] flex items-center gap-3">
+              <button onClick={openModal} className="group relative overflow-hidden bg-[#2a1f1a] text-[#d4b896] px-9 py-4 rounded-xl shadow-lg hover:shadow-[#2a1f1a]/30 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] flex items-center gap-3">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#3a2f2a] to-[#2a1f1a] opacity-0 group-hover:opacity-100 transition-opacity" />
                 <Calendar className="w-5 h-5 relative z-10 group-hover:rotate-6 transition-transform duration-300" />
                 <span className="relative z-10 text-base tracking-wide">Book Appointment</span>
@@ -57,7 +58,7 @@ export function Hero() {
               {[
                 { icon: TrendingUp, value: "98%", label: "Success Rate", color: "#c4975a" },
                 { icon: Crown, value: "6+", label: "Years Exp.", color: "#7c2d3e" },
-                { icon: Users, value: "15K+", label: "Patients", color: "#b5a090" },
+                { icon: Star, value: "5.0", label: "Patient Rating", color: "#b5a090" },
               ].map(({ icon: Icon, value, label, color }, i) => (
                 <div key={i} className="group bg-white rounded-2xl p-4 border border-[#e5d9cf] shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                   <Icon className="w-4 h-4 mb-2" style={{ color }} />
@@ -86,14 +87,14 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Floating happy patients card */}
+              {/* Floating rating card */}
               <div className="absolute -bottom-8 -left-8 bg-white rounded-2xl px-6 py-4 shadow-xl border border-[#e5d9cf] flex items-center gap-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                 <div className="w-12 h-12 rounded-xl bg-[#7c2d3e]/10 border border-[#7c2d3e]/20 flex items-center justify-center">
-                  <Users className="w-6 h-6 text-[#7c2d3e]" />
+                  <Star className="w-6 h-6 text-[#7c2d3e] fill-[#7c2d3e]" />
                 </div>
                 <div>
-                  <p className="text-xs text-[#8a7060] mb-0.5">Happy Patients</p>
-                  <p className="text-sm font-semibold text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)" }}>15,000+ Smiles</p>
+                  <p className="text-xs text-[#8a7060] mb-0.5">Patient Rating</p>
+                  <p className="text-sm font-semibold text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)" }}>5.0 · Excellent</p>
                 </div>
               </div>
 

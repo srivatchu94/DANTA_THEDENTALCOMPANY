@@ -3,8 +3,11 @@ import { Phone, Mail, Clock, Calendar, Home, Briefcase, Target, MessageCircle, M
 import { useState, useEffect } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import clinicLogo from "@/imports/Clinic_Logo.jpg";
+import { useBookingModal } from "./BookingModalContext";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_EMAIL, CONTACT_EMAIL_HREF } from "./contact-info";
 
 export function Header() {
+  const { openModal } = useBookingModal();
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -48,17 +51,17 @@ export function Header() {
         <div className="relative w-full px-4">
           <div className="flex items-center justify-between py-2.5">
             <div className="flex items-center gap-5">
-              <a href="tel:+918056010278" className="group flex items-center gap-2 text-[#d4b896]/80 hover:text-[#c4975a] transition-colors duration-300">
+              <a href={CONTACT_PHONE_TEL} className="group flex items-center gap-2 text-[#d4b896]/80 hover:text-[#c4975a] transition-colors duration-300">
                 <div className="w-7 h-7 rounded-lg border border-[#c4975a]/25 flex items-center justify-center group-hover:border-[#c4975a]/60 transition-colors">
                   <Phone className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-xs tracking-wide">+91 80560 10278</span>
+                <span className="text-xs tracking-wide">{CONTACT_PHONE_DISPLAY}</span>
               </a>
-              <a href="mailto:info@danta.com" className="hidden sm:flex items-center gap-2 text-[#d4b896]/80 hover:text-[#c4975a] transition-colors duration-300 group">
+              <a href={CONTACT_EMAIL_HREF} className="hidden sm:flex items-center gap-2 text-[#d4b896]/80 hover:text-[#c4975a] transition-colors duration-300 group">
                 <div className="w-7 h-7 rounded-lg border border-[#c4975a]/25 flex items-center justify-center group-hover:border-[#c4975a]/60 transition-colors">
                   <Mail className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-xs tracking-wide">info@danta.com</span>
+                <span className="text-xs tracking-wide">{CONTACT_EMAIL}</span>
               </a>
             </div>
             <div className="flex items-center gap-2 text-[#d4b896]/70">
@@ -176,7 +179,7 @@ export function Header() {
 
             {/* ── Book CTA ── */}
             <div className="hidden md:block">
-              <button className="group relative overflow-hidden bg-[#c4975a] text-white px-7 py-3 rounded-xl shadow-md hover:shadow-[#c4975a]/40 hover:shadow-lg transition-all duration-300 hover:scale-[1.03]">
+              <button onClick={openModal} className="group relative overflow-hidden bg-[#c4975a] text-white px-7 py-3 rounded-xl shadow-md hover:shadow-[#c4975a]/40 hover:shadow-lg transition-all duration-300 hover:scale-[1.03]">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#b8844a] to-[#d4a86a] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative flex items-center gap-2">
                   <Calendar className="w-4 h-4 group-hover:rotate-6 transition-transform duration-300" />
@@ -212,7 +215,10 @@ export function Header() {
                 </a>
               );
             })}
-            <button className="w-full mt-2 bg-[#c4975a] text-white px-6 py-3 rounded-xl text-sm flex items-center justify-center gap-2">
+            <button
+              onClick={() => { openModal(); setMobileOpen(false); }}
+              className="w-full mt-2 bg-[#c4975a] text-white px-6 py-3 rounded-xl text-sm flex items-center justify-center gap-2"
+            >
               <Calendar className="w-4 h-4" />
               Book Now
             </button>

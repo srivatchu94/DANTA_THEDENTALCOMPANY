@@ -1,6 +1,7 @@
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import logoSrc from "@/imports/unnamed__1_.jpg";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_EMAIL, CONTACT_EMAIL_HREF, CONTACT_INSTAGRAM_URL } from "./contact-info";
 
 export function Footer() {
   return (
@@ -28,10 +29,10 @@ export function Footer() {
               {[
                 { icon: Facebook, href: "#" },
                 { icon: Twitter, href: "#" },
-                { icon: Instagram, href: "#" },
+                { icon: Instagram, href: CONTACT_INSTAGRAM_URL },
                 { icon: Linkedin, href: "#" },
               ].map(({ icon: Icon, href }, i) => (
-                <a key={i} href={href} className="w-9 h-9 rounded-lg border border-[#c4975a]/20 flex items-center justify-center text-[#8a7060] hover:text-[#c4975a] hover:border-[#c4975a]/50 transition-all duration-200 hover:scale-110">
+                <a key={i} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="w-9 h-9 rounded-lg border border-[#c4975a]/20 flex items-center justify-center text-[#8a7060] hover:text-[#c4975a] hover:border-[#c4975a]/50 transition-all duration-200 hover:scale-110">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
@@ -82,15 +83,19 @@ export function Footer() {
             </h4>
             <ul className="space-y-4">
               {[
-                { icon: MapPin, value: "S.No.271/15, 2/387A, First Floor, Sathyavani Muthu Street, Gerugambakkam Main Road, Chennai – 600128", color: "#c4975a" },
-                { icon: Phone, value: "+91 80560 10278", color: "#7c2d3e" },
-                { icon: Mail, value: "info@danta.com", color: "#b5a090" },
-              ].map(({ icon: Icon, value, color }, i) => (
+                { icon: MapPin, value: "S.No.271/15, 2/387A, First Floor, Sathyavani Muthu Street, Gerugambakkam Main Road, Chennai – 600128", color: "#c4975a", href: undefined },
+                { icon: Phone, value: CONTACT_PHONE_DISPLAY, color: "#7c2d3e", href: CONTACT_PHONE_TEL },
+                { icon: Mail, value: CONTACT_EMAIL, color: "#b5a090", href: CONTACT_EMAIL_HREF },
+              ].map(({ icon: Icon, value, color, href }, i) => (
                 <li key={i} className="flex items-start gap-3 group">
                   <div className="w-8 h-8 rounded-lg border border-white/5 flex items-center justify-center flex-shrink-0 group-hover:border-[#c4975a]/30 transition-colors">
                     <Icon className="w-4 h-4" style={{ color }} />
                   </div>
-                  <p className="text-sm text-[#8a7060] leading-relaxed pt-1">{value}</p>
+                  {href ? (
+                    <a href={href} className="text-sm text-[#8a7060] hover:text-[#c4975a] leading-relaxed pt-1 transition-colors">{value}</a>
+                  ) : (
+                    <p className="text-sm text-[#8a7060] leading-relaxed pt-1">{value}</p>
+                  )}
                 </li>
               ))}
             </ul>

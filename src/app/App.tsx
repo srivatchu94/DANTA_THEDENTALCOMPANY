@@ -5,19 +5,26 @@ import { Mission } from "./components/Mission";
 import { Testimonials } from "./components/Testimonials";
 import { CTA } from "./components/CTA";
 import { Footer } from "./components/Footer";
+import { BookingModalProvider } from "./components/BookingModalContext";
+import { BookingModal } from "./components/BookingModal";
+import { WhatsAppFAB } from "./components/WhatsAppFAB";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <Hero />
-        <Services />
-        <Mission />
-        <Testimonials />
-        <CTA />
-      </main>
-      <Footer />
-    </div>
+    <BookingModalProvider>
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
+          <Hero />
+          <Services />
+          <Mission />
+          <Testimonials />
+          <CTA />
+        </main>
+        <Footer />
+        <BookingModal />
+        <WhatsAppFAB />
+      </div>
+    </BookingModalProvider>
   );
 }
