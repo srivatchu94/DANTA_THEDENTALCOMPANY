@@ -9,7 +9,7 @@ import {
 } from "./ui/dialog";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useBookingModal } from "./BookingModalContext";
-import { CONTACT_WHATSAPP_NUMBER } from "./contact-info";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL } from "./contact-info";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 
@@ -54,21 +54,10 @@ export function BookingModal() {
       setTimeout(() => {
         closeModal();
         setTimeout(reset, 300);
-      }, 2200);
+      }, 3200);
     } catch {
       setStatus("error");
     }
-  }
-
-  function fallbackWhatsAppUrl() {
-    const lines = [
-      "Hello Danta – The Dental Company! I'd like to book an appointment.",
-      "",
-      `*Name:* ${name.trim()}`,
-      `*Phone:* ${phone.trim()}`,
-      `*Concern:* ${problem.trim()}`,
-    ];
-    return `https://wa.me/${CONTACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
   }
 
   return (
@@ -95,7 +84,7 @@ export function BookingModal() {
                 Let&apos;s Get You <span className="italic text-[#c4975a]">Scheduled</span>
               </DialogPrimitive.Title>
               <DialogPrimitive.Description className="text-[#8a7060] text-sm mt-1.5">
-                Share a few details and our team will get in touch to book your appointment.
+                Share a few details and our team will personally reach out to book your appointment.
               </DialogPrimitive.Description>
             </div>
             <DialogClose className="w-9 h-9 flex-shrink-0 rounded-xl border border-[#e5d9cf] flex items-center justify-center text-[#8a7060] hover:text-[#2a1f1a] hover:border-[#c4975a]/50 transition-all duration-200">
@@ -110,10 +99,10 @@ export function BookingModal() {
                 <CheckCircle2 className="w-8 h-8 text-[#c4975a]" />
               </div>
               <p className="text-[#2a1f1a] text-lg" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
-                Request Sent!
+                Thank You!
               </p>
-              <p className="text-[#8a7060] text-sm text-center max-w-xs">
-                Our team will get in touch with you on WhatsApp shortly to confirm your appointment.
+              <p className="text-[#8a7060] text-sm text-center max-w-xs leading-relaxed">
+                Your details have been received. Our team will get in touch with you shortly to book your appointment — you can expect a quick call from us soon.
               </p>
             </div>
           ) : (
@@ -167,14 +156,9 @@ export function BookingModal() {
                 <div className="flex items-start gap-2.5 bg-[#7c2d3e]/8 border border-[#7c2d3e]/25 rounded-xl px-4 py-3">
                   <AlertCircle className="w-4 h-4 text-[#7c2d3e] flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-[#7c2d3e] leading-relaxed">
-                    We couldn&apos;t send that automatically.{" "}
-                    <a
-                      href={fallbackWhatsAppUrl()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline font-medium"
-                    >
-                      Message us directly on WhatsApp
+                    We couldn&apos;t send that automatically. Please{" "}
+                    <a href={CONTACT_PHONE_TEL} className="underline font-medium">
+                      call us directly at {CONTACT_PHONE_DISPLAY}
                     </a>{" "}
                     instead.
                   </p>
@@ -184,8 +168,9 @@ export function BookingModal() {
               <button
                 type="submit"
                 disabled={!name.trim() || !phone.trim() || !problem.trim() || status === "submitting"}
-                className="group relative w-full overflow-hidden bg-[#25D366] disabled:opacity-40 disabled:cursor-not-allowed text-white px-8 py-3.5 rounded-xl shadow-md hover:shadow-[#25D366]/30 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] flex items-center justify-center gap-2.5"
+                className="group relative w-full overflow-hidden bg-[#c4975a] disabled:opacity-40 disabled:cursor-not-allowed text-white px-8 py-3.5 rounded-xl shadow-md hover:shadow-[#c4975a]/30 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] flex items-center justify-center gap-2.5"
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#b8844a] to-[#d4a86a] opacity-0 group-hover:opacity-100 transition-opacity" />
                 <Send className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform duration-300" />
                 <span className="text-sm tracking-wide relative z-10">
                   {status === "submitting" ? "Sending…" : "Book Appointment"}

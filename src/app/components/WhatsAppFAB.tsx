@@ -1,5 +1,5 @@
 "use client";
-import { useBookingModal } from "./BookingModalContext";
+import { CONTACT_WHATSAPP_NUMBER } from "./contact-info";
 
 function WhatsAppIcon() {
   return (
@@ -9,13 +9,16 @@ function WhatsAppIcon() {
   );
 }
 
-export function WhatsAppFAB() {
-  const { openModal } = useBookingModal();
+const CHAT_MESSAGE = "Hello Danta – The Dental Company! I'd like to know more about booking an appointment.";
+const CHAT_URL = `https://wa.me/${CONTACT_WHATSAPP_NUMBER}?text=${encodeURIComponent(CHAT_MESSAGE)}`;
 
+export function WhatsAppFAB() {
   return (
-    <button
-      onClick={openModal}
-      aria-label="Book an appointment via WhatsApp"
+    <a
+      href={CHAT_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat with Danta on WhatsApp"
       className="group fixed bottom-6 right-6 z-40 flex items-center gap-0 rounded-full bg-[#25D366] text-white shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-[#25D366]/40 transition-all duration-300 hover:scale-105"
     >
       <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25 pointer-events-none" />
@@ -24,9 +27,9 @@ export function WhatsAppFAB() {
           <WhatsAppIcon />
         </span>
         <span className="max-w-0 group-hover:max-w-[10rem] overflow-hidden whitespace-nowrap text-sm tracking-wide transition-all duration-300 group-hover:pr-5">
-          Book on WhatsApp
+          Chat with Us
         </span>
       </span>
-    </button>
+    </a>
   );
 }
