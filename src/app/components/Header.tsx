@@ -82,15 +82,15 @@ export function Header() {
           <div className="flex items-center justify-between py-2.5">
 
             {/* ── Brand with embossed logo ── */}
-            <div className="flex items-center gap-4 cursor-pointer group">
+            <div className="flex items-center gap-3 md:gap-5 cursor-pointer group">
               {/* Embossed logo badge */}
               <div className="relative flex-shrink-0">
-                {/* Outer glow ring on hover */}
-                <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-[#c4975a]/30 to-[#7c2d3e]/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Ambient glow, always on */}
+                <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-[#c4975a]/40 to-[#7c2d3e]/25 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Dark embossed container */}
                 <div
-                  className="relative w-[78px] h-[78px] rounded-full overflow-hidden"
+                  className="relative w-[64px] h-[64px] md:w-[104px] md:h-[104px] rounded-full overflow-hidden"
                   style={{
                     background: "radial-gradient(ellipse at 35% 25%, #2e2418 0%, #1a1008 60%, #120c06 100%)",
                     boxShadow:
@@ -129,22 +129,23 @@ export function Header() {
               {/* Brand text */}
               <div className="group-hover:translate-x-0.5 transition-transform duration-300">
                 <h1
-                  className="text-[2rem] tracking-[0.18em] uppercase leading-none"
-                  style={{ fontFamily: "var(--font-heading)", fontWeight: 700 }}
+                  className="text-[1.75rem] md:text-[3.1rem] tracking-[0.1em] md:tracking-[0.12em] uppercase leading-none"
+                  style={{ fontFamily: "var(--font-heading)", fontWeight: 800 }}
                 >
                   <span
                     className="bg-clip-text text-transparent"
                     style={{
                       backgroundImage:
                         "linear-gradient(105deg, #a87040 0%, #e8c98a 32%, #c4975a 52%, #f0d9a0 68%, #a87040 100%)",
+                      filter: "drop-shadow(0 2px 10px rgba(196,151,90,0.45))",
                     }}
                   >
                     DANTA
                   </span>
                 </h1>
-                <div className="flex items-center gap-2 mt-[5px]">
+                <div className="flex items-center gap-2 md:gap-2.5 mt-[3px] md:mt-1.5">
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#c4975a]/45" />
-                  <span className="text-[11px] tracking-[0.22em] text-[#8a7060] uppercase whitespace-nowrap">
+                  <span className="text-[9px] md:text-[13px] tracking-[0.2em] md:tracking-[0.26em] text-[#8a7060] uppercase whitespace-nowrap">
                     The Dental Company
                   </span>
                   <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c4975a]/45" />

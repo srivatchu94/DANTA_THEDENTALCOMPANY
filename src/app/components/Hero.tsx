@@ -5,7 +5,7 @@ import { useBookingModal } from "./BookingModalContext";
 export function Hero() {
   const { openModal } = useBookingModal();
   return (
-    <section id="home" className="relative overflow-hidden bg-[#faf5ef] pt-40 pb-24">
+    <section id="home" className="relative overflow-hidden bg-[#faf5ef] pt-36 md:pt-48 pb-24">
       {/* Subtle warm background orbs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c4975a]/8 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#7c2d3e]/6 rounded-full blur-[100px] pointer-events-none" />
