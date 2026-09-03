@@ -82,7 +82,7 @@ export function Header() {
           <div className="flex items-center justify-between py-2.5">
 
             {/* ── Brand with embossed logo ── */}
-            <div className="flex items-center gap-3.5 cursor-pointer group">
+            <div className="flex items-center gap-4 cursor-pointer group">
               {/* Embossed logo badge */}
               <div className="relative flex-shrink-0">
                 {/* Outer glow ring on hover */}
@@ -90,7 +90,7 @@ export function Header() {
 
                 {/* Dark embossed container */}
                 <div
-                  className="relative w-[62px] h-[62px] rounded-full overflow-hidden"
+                  className="relative w-[78px] h-[78px] rounded-full overflow-hidden"
                   style={{
                     background: "radial-gradient(ellipse at 35% 25%, #2e2418 0%, #1a1008 60%, #120c06 100%)",
                     boxShadow:
@@ -129,7 +129,7 @@ export function Header() {
               {/* Brand text */}
               <div className="group-hover:translate-x-0.5 transition-transform duration-300">
                 <h1
-                  className="text-[1.35rem] tracking-[0.22em] uppercase leading-none"
+                  className="text-[2rem] tracking-[0.18em] uppercase leading-none"
                   style={{ fontFamily: "var(--font-heading)", fontWeight: 700 }}
                 >
                   <span
@@ -142,9 +142,9 @@ export function Header() {
                     DANTA
                   </span>
                 </h1>
-                <div className="flex items-center gap-1.5 mt-[3px]">
+                <div className="flex items-center gap-2 mt-[5px]">
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#c4975a]/45" />
-                  <span className="text-[9px] tracking-[0.28em] text-[#8a7060] uppercase whitespace-nowrap">
+                  <span className="text-[11px] tracking-[0.22em] text-[#8a7060] uppercase whitespace-nowrap">
                     The Dental Company
                   </span>
                   <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c4975a]/45" />

@@ -7,7 +7,6 @@ import { CTA } from "./components/CTA";
 import { Footer } from "./components/Footer";
 import { BookingModalProvider } from "./components/BookingModalContext";
 import { BookingModal } from "./components/BookingModal";
-import { WhatsAppFAB } from "./components/WhatsAppFAB";
 
 export default function App() {
   return (
@@ -23,7 +22,6 @@ export default function App() {
         </main>
         <Footer />
         <BookingModal />
-        <WhatsAppFAB />
       </div>
     </BookingModalProvider>
   );
