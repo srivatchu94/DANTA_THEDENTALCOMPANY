@@ -66,7 +66,7 @@ export function Header() {
             </div>
             <div className="flex items-center gap-2 text-[#d4b896]/70">
               <Clock className="w-3.5 h-3.5 text-[#c4975a]" />
-              <span className="text-xs tracking-wide">Mon–Fri: 8AM – 6PM</span>
+              <span className="text-xs tracking-wide">Mon–Sat: 10AM – 8PM</span>
             </div>
           </div>
         </div>

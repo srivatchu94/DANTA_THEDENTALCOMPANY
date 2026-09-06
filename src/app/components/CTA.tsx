@@ -103,13 +103,12 @@ export function CTA() {
                 </div>
                 <div className="space-y-2 text-sm">
                   {[
-                    ["Monday – Friday", "8:00 AM – 6:00 PM"],
-                    ["Saturday", "9:00 AM – 4:00 PM"],
-                    ["Sunday", "Closed"],
+                    ["Monday – Saturday", "10:00 AM – 8:00 PM"],
+                    ["Sunday", "By Appointment Only"],
                   ].map(([day, hours], i) => (
                     <div key={i} className="flex justify-between">
                       <span className="text-[#8a7060]">{day}</span>
-                      <span className={hours === "Closed" ? "text-[#7c2d3e]" : "text-[#2a1f1a]"}>{hours}</span>
+                      <span className={hours === "By Appointment Only" ? "text-[#7c2d3e]" : "text-[#2a1f1a]"}>{hours}</span>
                     </div>
                   ))}
                 </div>
