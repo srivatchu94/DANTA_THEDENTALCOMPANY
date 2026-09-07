@@ -51,11 +51,12 @@ export function Header() {
         <div className="relative w-full px-4">
           <div className="flex items-center justify-between py-2.5">
             <div className="flex items-center gap-5">
-              <a href={CONTACT_PHONE_TEL} className="group flex items-center gap-2 text-[#d4b896]/80 hover:text-[#c4975a] transition-colors duration-300">
-                <div className="w-7 h-7 rounded-lg border border-[#c4975a]/25 flex items-center justify-center group-hover:border-[#c4975a]/60 transition-colors">
-                  <Phone className="w-3.5 h-3.5" />
+              <a href={CONTACT_PHONE_TEL} className="group flex items-center gap-2.5 text-[#f0d9a0] hover:text-white transition-colors duration-300">
+                <div className="relative w-9 h-9 rounded-lg bg-[#c4975a]/15 border border-[#c4975a]/45 flex items-center justify-center group-hover:bg-[#c4975a]/25 group-hover:border-[#c4975a]/80 group-hover:scale-110 transition-all duration-300">
+                  <Phone className="w-[18px] h-[18px]" />
+                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#c4975a] animate-pulse" />
                 </div>
-                <span className="text-xs tracking-wide">{CONTACT_PHONE_DISPLAY}</span>
+                <span className="text-base tracking-wide" style={{ fontWeight: 800 }}>{CONTACT_PHONE_DISPLAY}</span>
               </a>
               <a href={CONTACT_EMAIL_HREF} className="hidden sm:flex items-center gap-2 text-[#d4b896]/80 hover:text-[#c4975a] transition-colors duration-300 group">
                 <div className="w-7 h-7 rounded-lg border border-[#c4975a]/25 flex items-center justify-center group-hover:border-[#c4975a]/60 transition-colors">
@@ -82,7 +83,7 @@ export function Header() {
           <div className="flex items-center justify-between py-2.5">
 
             {/* ── Brand with embossed logo ── */}
-            <div className="flex items-center gap-3 md:gap-5 cursor-pointer group">
+            <div className="flex items-center gap-3 lg:gap-5 cursor-pointer group">
               {/* Embossed logo badge */}
               <div className="relative flex-shrink-0">
                 {/* Ambient glow, always on */}
@@ -90,7 +91,7 @@ export function Header() {
 
                 {/* Dark embossed container */}
                 <div
-                  className="relative w-[64px] h-[64px] md:w-[104px] md:h-[104px] rounded-full overflow-hidden"
+                  className="relative w-[64px] h-[64px] lg:w-[104px] lg:h-[104px] rounded-full overflow-hidden"
                   style={{
                     background: "radial-gradient(ellipse at 35% 25%, #2e2418 0%, #1a1008 60%, #120c06 100%)",
                     boxShadow:
@@ -129,7 +130,7 @@ export function Header() {
               {/* Brand text */}
               <div className="group-hover:translate-x-0.5 transition-transform duration-300">
                 <h1
-                  className="text-[1.75rem] md:text-[3.1rem] tracking-[0.1em] md:tracking-[0.12em] uppercase leading-none"
+                  className="text-[1.75rem] lg:text-[3.1rem] tracking-[0.1em] lg:tracking-[0.12em] uppercase leading-none"
                   style={{ fontFamily: "var(--font-heading)", fontWeight: 800 }}
                 >
                   <span
@@ -143,9 +144,9 @@ export function Header() {
                     DANTA
                   </span>
                 </h1>
-                <div className="flex items-center gap-2 md:gap-2.5 mt-[3px] md:mt-1.5">
+                <div className="flex items-center gap-2 lg:gap-2.5 mt-[3px] lg:mt-1.5">
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#c4975a]/45" />
-                  <span className="text-[9px] md:text-[13px] tracking-[0.2em] md:tracking-[0.26em] text-[#8a7060] uppercase whitespace-nowrap">
+                  <span className="text-[9px] lg:text-[13px] tracking-[0.2em] lg:tracking-[0.26em] text-[#8a7060] uppercase whitespace-nowrap">
                     The Dental Company
                   </span>
                   <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c4975a]/45" />
@@ -154,7 +155,7 @@ export function Header() {
             </div>
 
             {/* ── Tab nav ── */}
-            <nav className="hidden md:flex items-center">
+            <nav className="hidden lg:flex items-center">
               <div className="flex items-center gap-1 bg-[#f3ece4] rounded-xl p-1 border border-[#e5d9cf]">
                 {navItems.map((item) => {
                   const Icon = item.icon;
@@ -178,8 +179,25 @@ export function Header() {
               </div>
             </nav>
 
-            {/* ── Book CTA ── */}
-            <div className="hidden md:block">
+            {/* ── Call Now + Book CTA ── */}
+            <div className="hidden lg:flex items-center gap-4">
+              {/* Prominent call-now block, right beside Book Now */}
+              <a
+                href={CONTACT_PHONE_TEL}
+                className="hidden xl:flex group items-center gap-3 bg-[#7c2d3e]/8 border-2 border-[#7c2d3e]/30 hover:border-[#7c2d3e]/55 hover:bg-[#7c2d3e]/14 rounded-xl pl-3.5 pr-5 py-2.5 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.04]"
+              >
+                <div className="relative w-11 h-11 rounded-full bg-[#7c2d3e] flex items-center justify-center flex-shrink-0 shadow-md">
+                  <Phone className="w-5 h-5 text-white" />
+                  <span className="absolute inset-0 rounded-full bg-[#7c2d3e] animate-ping opacity-40 pointer-events-none" />
+                </div>
+                <div className="leading-tight">
+                  <p className="text-[11px] text-[#7c2d3e] uppercase tracking-widest font-semibold">Call Now</p>
+                  <p className="text-xl text-[#2a1f1a] font-extrabold tracking-wide group-hover:text-[#7c2d3e] transition-colors">
+                    {CONTACT_PHONE_DISPLAY}
+                  </p>
+                </div>
+              </a>
+
               <button onClick={openModal} className="group relative overflow-hidden bg-[#c4975a] text-white px-7 py-3 rounded-xl shadow-md hover:shadow-[#c4975a]/40 hover:shadow-lg transition-all duration-300 hover:scale-[1.03]">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#b8844a] to-[#d4a86a] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative flex items-center gap-2">
@@ -189,13 +207,23 @@ export function Header() {
               </button>
             </div>
 
-            {/* ── Mobile toggle ── */}
-            <button
-              className="md:hidden w-10 h-10 rounded-xl border border-[#e5d9cf] flex items-center justify-center text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            {/* ── Mobile/tablet: call button + menu toggle ── */}
+            <div className="flex lg:hidden items-center gap-2">
+              <a
+                href={CONTACT_PHONE_TEL}
+                aria-label={`Call Danta at ${CONTACT_PHONE_DISPLAY}`}
+                className="relative w-10 h-10 rounded-xl bg-[#7c2d3e] flex items-center justify-center text-white shadow-md active:scale-95 transition-transform"
+              >
+                <Phone className="w-4 h-4" />
+                <span className="absolute inset-0 rounded-xl bg-[#7c2d3e] animate-ping opacity-30 pointer-events-none" />
+              </a>
+              <button
+                className="w-10 h-10 rounded-xl border border-[#e5d9cf] flex items-center justify-center text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
+                onClick={() => setMobileOpen(!mobileOpen)}
+              >
+                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
         </div>
 
