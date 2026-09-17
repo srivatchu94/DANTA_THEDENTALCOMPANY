@@ -1,4 +1,5 @@
 import { Scan, Smile, Sparkles, Shield, Layers, Syringe, Stethoscope, HeartPulse, Scissors, Baby, Zap, Heart, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ACCENTS = [
   { accent: "#c4975a", bg: "#fdf8f2" },
@@ -16,31 +17,37 @@ const services = [
     icon: Smile,
     title: "Smile Designing & Digital Makeovers",
     description: "Personalized Smile Designing and Digital Smile Makeovers crafted around your unique facial aesthetics.",
+    link: "/treatments/smile-designing",
   },
   {
     icon: Sparkles,
     title: "Cosmetic Dentistry",
     description: "Veneers, Teeth Whitening & advanced aesthetic procedures to transform your smile.",
+    link: "/treatments/teeth-whitening",
   },
   {
     icon: Shield,
     title: "Dental Implants & Prosthodontics",
     description: "Dental Implants, Crowns & Bridges and full Prosthodontics to restore function, form and confidence.",
+    link: "/treatments/dental-implants",
   },
   {
     icon: Layers,
     title: "Full Mouth Rehabilitation",
     description: "Comprehensive, multi-treatment rehabilitation that rebuilds a fully healthy, functional smile.",
+    link: "/treatments/full-mouth-rehabilitation",
   },
   {
     icon: Syringe,
     title: "Root Canal & Endodontics",
     description: "Painless Root Canal Treatment and advanced Endodontics to save and protect your natural teeth.",
+    link: "/treatments/root-canal-treatment",
   },
   {
     icon: Stethoscope,
     title: "Orthodontics & Invisalign®",
     description: "Braces, Invisalign® & Clear Aligners to perfectly align your teeth and bite.",
+    link: "/treatments/invisalign-clear-aligners",
   },
   {
     icon: HeartPulse,
@@ -51,6 +58,7 @@ const services = [
     icon: Scissors,
     title: "Oral Surgery & Extractions",
     description: "Safe, comfortable Oral Surgery including Wisdom Tooth Extraction and other surgical care.",
+    link: "/treatments/wisdom-tooth-extraction",
   },
   {
     icon: Baby,
@@ -96,46 +104,46 @@ export function Services() {
         {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <div key={index} className="group relative">
-              <div
-                className="relative h-full rounded-2xl p-8 border border-[#e5d9cf] hover:border-transparent hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden"
-                style={{ backgroundColor: service.bg }}
-              >
-                {/* Hover glow layer */}
+              <Link key={index} to={service.link ?? "/#contact"} className="group relative block">
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                  style={{ boxShadow: `inset 0 0 0 1.5px ${service.accent}40` }}
-                />
-                {/* Shimmer */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl" />
-
-                {/* Icon */}
-                <div className="mb-6">
+                  className="relative h-full rounded-2xl p-8 border border-[#e5d9cf] hover:border-transparent hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden"
+                  style={{ backgroundColor: service.bg }}
+                >
+                  {/* Hover glow layer */}
                   <div
-                    className="w-14 h-14 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-400"
-                    style={{ backgroundColor: `${service.accent}15`, border: `1.5px solid ${service.accent}30` }}
-                  >
-                    <service.icon className="w-7 h-7" style={{ color: service.accent }} strokeWidth={1.5} />
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                    style={{ boxShadow: `inset 0 0 0 1.5px ${service.accent}40` }}
+                  />
+                  {/* Shimmer */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl" />
+
+                  {/* Icon */}
+                  <div className="mb-6">
+                    <div
+                      className="w-14 h-14 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-400"
+                      style={{ backgroundColor: `${service.accent}15`, border: `1.5px solid ${service.accent}30` }}
+                    >
+                      <service.icon className="w-7 h-7" style={{ color: service.accent }} strokeWidth={1.5} />
+                    </div>
                   </div>
+
+                  <h3 className="text-xl mb-3 text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-[#8a7060] leading-relaxed mb-6">{service.description}</p>
+
+                  <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300" style={{ color: service.accent }}>
+                    <span>{service.link ? "Learn More" : "Ask Us"}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+                  </span>
+
+                  {/* Decorative corner shape */}
+                  <div
+                    className="absolute top-0 right-0 w-20 h-20 rounded-bl-[60px] rounded-tr-2xl opacity-5 group-hover:opacity-10 transition-opacity"
+                    style={{ backgroundColor: service.accent }}
+                  />
                 </div>
-
-                <h3 className="text-xl mb-3 text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
-                  {service.title}
-                </h3>
-                <p className="text-sm text-[#8a7060] leading-relaxed mb-6">{service.description}</p>
-
-                <button className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300" style={{ color: service.accent }}>
-                  <span>Learn More</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
-                </button>
-
-                {/* Decorative corner shape */}
-                <div
-                  className="absolute top-0 right-0 w-20 h-20 rounded-bl-[60px] rounded-tr-2xl opacity-5 group-hover:opacity-10 transition-opacity"
-                  style={{ backgroundColor: service.accent }}
-                />
-              </div>
-            </div>
+              </Link>
           ))}
         </div>
 

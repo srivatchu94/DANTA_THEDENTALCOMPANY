@@ -1,28 +1,27 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
-import { Services } from "./components/Services";
-import { Mission } from "./components/Mission";
-import { Testimonials } from "./components/Testimonials";
-import { CTA } from "./components/CTA";
 import { Footer } from "./components/Footer";
 import { BookingModalProvider } from "./components/BookingModalContext";
 import { BookingModal } from "./components/BookingModal";
+import { ScrollToHash } from "./components/ScrollToHash";
+import Home from "./pages/Home";
+import TreatmentPage from "./pages/TreatmentPage";
 
 export default function App() {
   return (
-    <BookingModalProvider>
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main>
-          <Hero />
-          <Services />
-          <Mission />
-          <Testimonials />
-          <CTA />
-        </main>
-        <Footer />
-        <BookingModal />
-      </div>
-    </BookingModalProvider>
+    <BrowserRouter>
+      <BookingModalProvider>
+        <div className="min-h-screen bg-background">
+          <Header />
+          <ScrollToHash />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/treatments/:slug" element={<TreatmentPage />} />
+          </Routes>
+          <Footer />
+          <BookingModal />
+        </div>
+      </BookingModalProvider>
+    </BrowserRouter>
   );
 }

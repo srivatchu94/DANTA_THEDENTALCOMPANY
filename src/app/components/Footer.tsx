@@ -1,7 +1,16 @@
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import logoSrc from "@/imports/unnamed__1_.jpg";
 import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_EMAIL, CONTACT_EMAIL_HREF, CONTACT_INSTAGRAM_URL } from "./contact-info";
+import { treatments } from "../data/treatments";
+
+const QUICK_LINKS = [
+  { label: "Home", to: "/" },
+  { label: "Services", to: "/#services" },
+  { label: "Mission", to: "/#mission" },
+  { label: "Contact", to: "/#contact" },
+];
 
 export function Footer() {
   return (
@@ -46,9 +55,17 @@ export function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-2.5">
-              {["Home", "Services", "Mission", "Contact", "Blog", "Careers"].map((link) => (
+              {QUICK_LINKS.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="text-[#8a7060] hover:text-[#c4975a] transition-colors text-sm flex items-center gap-2 group">
+                    <span className="w-1 h-1 bg-[#c4975a]/40 rounded-full group-hover:bg-[#c4975a] transition-colors" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              {["Blog", "Careers"].map((link) => (
                 <li key={link}>
-                  <a href={`#${link.toLowerCase()}`} className="text-[#8a7060] hover:text-[#c4975a] transition-colors text-sm flex items-center gap-2 group">
+                  <a href="#" className="text-[#8a7060] hover:text-[#c4975a] transition-colors text-sm flex items-center gap-2 group">
                     <span className="w-1 h-1 bg-[#c4975a]/40 rounded-full group-hover:bg-[#c4975a] transition-colors" />
                     {link}
                   </a>
@@ -64,14 +81,20 @@ export function Footer() {
               Our Services
             </h4>
             <ul className="space-y-2.5">
-              {["General Dentistry", "Cosmetic Dentistry", "Orthodontics", "Restorative Care", "Digital Imaging", "Emergency Care"].map((s) => (
-                <li key={s}>
-                  <a href="#services" className="text-[#8a7060] hover:text-[#c4975a] transition-colors text-sm flex items-center gap-2 group">
+              {treatments.map((t) => (
+                <li key={t.slug}>
+                  <Link to={`/treatments/${t.slug}`} className="text-[#8a7060] hover:text-[#c4975a] transition-colors text-sm flex items-center gap-2 group">
                     <span className="w-1 h-1 bg-[#7c2d3e]/40 rounded-full group-hover:bg-[#c4975a] transition-colors" />
-                    {s}
-                  </a>
+                    {t.title}
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link to="/#services" className="text-[#c4975a] hover:text-[#e8c98a] transition-colors text-sm flex items-center gap-2 group">
+                  <span className="w-1 h-1 bg-[#c4975a] rounded-full" />
+                  View All Services
+                </Link>
+              </li>
             </ul>
           </div>
 

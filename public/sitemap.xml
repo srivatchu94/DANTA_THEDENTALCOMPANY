@@ -5,4 +5,39 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/dental-implants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/invisalign-clear-aligners</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/smile-designing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/root-canal-treatment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/teeth-whitening</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/wisdom-tooth-extraction</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/full-mouth-rehabilitation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

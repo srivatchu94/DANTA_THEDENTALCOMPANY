@@ -1,20 +1,27 @@
 "use client";
-import { Phone, Mail, Clock, Calendar, Home, Briefcase, Target, MessageCircle, Menu, X } from "lucide-react";
+import { Phone, Mail, Clock, Calendar, Home, Target, MessageCircle, Menu, X, ChevronDown, Briefcase, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import clinicLogo from "@/imports/Clinic_Logo.jpg";
 import { useBookingModal } from "./BookingModalContext";
 import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_EMAIL, CONTACT_EMAIL_HREF } from "./contact-info";
+import { treatments } from "../data/treatments";
 
 export function Header() {
   const { openModal } = useBookingModal();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [treatmentsOpen, setTreatmentsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      if (location.pathname !== "/") return;
       const sections = ["home", "services", "mission", "testimonials", "contact"];
       const scrollMid = window.scrollY + window.innerHeight * 0.35;
       for (const id of [...sections].reverse()) {
@@ -28,14 +35,15 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const navItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "services", label: "Services", icon: Briefcase },
-    { id: "mission", label: "Mission", icon: Target },
-    { id: "contact", label: "Contact", icon: MessageCircle },
+    { id: "home", label: "Home", icon: Home, to: "/" },
+    { id: "mission", label: "Mission", icon: Target, to: "/#mission" },
+    { id: "contact", label: "Contact", icon: MessageCircle, to: "/#contact" },
   ];
+
+  const isTreatmentActive = location.pathname.startsWith("/treatments/");
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -83,7 +91,7 @@ export function Header() {
           <div className="flex items-center justify-between py-2.5">
 
             {/* ── Brand with embossed logo ── */}
-            <div className="flex items-center gap-3 lg:gap-5 cursor-pointer group">
+            <Link to="/" className="flex items-center gap-3 lg:gap-5 cursor-pointer group">
               {/* Embossed logo badge */}
               <div className="relative flex-shrink-0">
                 {/* Ambient glow, always on */}
@@ -152,28 +160,97 @@ export function Header() {
                   <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c4975a]/45" />
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* ── Tab nav ── */}
             <nav className="hidden lg:flex items-center">
               <div className="flex items-center gap-1 bg-[#f3ece4] rounded-xl p-1 border border-[#e5d9cf]">
-                {navItems.map((item) => {
+                {/* Home */}
+                {(() => {
+                  const item = navItems[0];
                   const Icon = item.icon;
-                  const isActive = activeTab === item.id;
+                  const isActive = isHome && activeTab === "home";
                   return (
-                    <a
+                    <Link
                       key={item.id}
-                      href={`#${item.id}`}
-                      onClick={() => setActiveTab(item.id)}
+                      to={item.to}
                       className={`relative px-5 py-2.5 rounded-lg text-sm transition-all duration-300 flex items-center gap-2 ${
-                        isActive
-                          ? "bg-[#2a1f1a] text-[#d4b896] shadow-md"
-                          : "text-[#8a7060] hover:text-[#2a1f1a] hover:bg-white/70"
+                        isActive ? "bg-[#2a1f1a] text-[#d4b896] shadow-md" : "text-[#8a7060] hover:text-[#2a1f1a] hover:bg-white/70"
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5" />
                       <span>{item.label}</span>
-                    </a>
+                    </Link>
+                  );
+                })()}
+
+                {/* Treatments dropdown, replaces the old flat "Services" link */}
+                <DropdownMenuPrimitive.Root open={treatmentsOpen} onOpenChange={setTreatmentsOpen}>
+                  <DropdownMenuPrimitive.Trigger asChild>
+                    <button
+                      className={`relative px-5 py-2.5 rounded-lg text-sm transition-all duration-300 flex items-center gap-2 outline-none ${
+                        (isHome && activeTab === "services") || isTreatmentActive
+                          ? "bg-[#2a1f1a] text-[#d4b896] shadow-md"
+                          : "text-[#8a7060] hover:text-[#2a1f1a] hover:bg-white/70"
+                      }`}
+                    >
+                      <Briefcase className="w-3.5 h-3.5" />
+                      <span>Services</span>
+                      <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${treatmentsOpen ? "rotate-180" : ""}`} />
+                    </button>
+                  </DropdownMenuPrimitive.Trigger>
+                  <DropdownMenuPrimitive.Portal>
+                    <DropdownMenuPrimitive.Content
+                      align="start"
+                      sideOffset={10}
+                      className="z-50 w-80 rounded-2xl border border-[#e5d9cf] bg-[#fdfaf6] shadow-2xl p-3 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+                    >
+                      <DropdownMenuPrimitive.Item asChild className="outline-none">
+                        <Link
+                          to="/#services"
+                          className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl text-sm text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors mb-1.5 group"
+                          style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}
+                        >
+                          <span>All Services</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#c4975a] group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+                      </DropdownMenuPrimitive.Item>
+                      <div className="h-px bg-[#e5d9cf] mb-1.5" />
+                      <div className="grid grid-cols-1 gap-0.5 max-h-[60vh] overflow-y-auto">
+                        {treatments.map((t) => {
+                          const TIcon = t.icon;
+                          return (
+                            <DropdownMenuPrimitive.Item key={t.slug} asChild className="outline-none">
+                              <Link
+                                to={`/treatments/${t.slug}`}
+                                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm text-[#8a7060] hover:text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
+                              >
+                                <TIcon className="w-4 h-4 text-[#c4975a] flex-shrink-0" strokeWidth={1.5} />
+                                <span>{t.title}</span>
+                              </Link>
+                            </DropdownMenuPrimitive.Item>
+                          );
+                        })}
+                      </div>
+                    </DropdownMenuPrimitive.Content>
+                  </DropdownMenuPrimitive.Portal>
+                </DropdownMenuPrimitive.Root>
+
+                {/* Mission + Contact */}
+                {navItems.slice(1).map((item) => {
+                  const Icon = item.icon;
+                  const isActive = isHome && activeTab === item.id;
+                  return (
+                    <Link
+                      key={item.id}
+                      to={item.to}
+                      className={`relative px-5 py-2.5 rounded-lg text-sm transition-all duration-300 flex items-center gap-2 ${
+                        isActive ? "bg-[#2a1f1a] text-[#d4b896] shadow-md" : "text-[#8a7060] hover:text-[#2a1f1a] hover:bg-white/70"
+                      }`}
+                    >
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>{item.label}</span>
+                    </Link>
                   );
                 })}
               </div>
@@ -229,24 +306,55 @@ export function Header() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-[#e5d9cf] bg-[#faf5ef] px-4 py-4 space-y-1.5">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={() => { setActiveTab(item.id); setMobileOpen(false); }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
-                >
-                  <Icon className="w-4 h-4 text-[#c4975a]" />
-                  <span className="text-sm">{item.label}</span>
-                </a>
-              );
-            })}
+          <div className="lg:hidden border-t border-[#e5d9cf] bg-[#faf5ef] px-4 py-4 max-h-[calc(100vh-140px)] overflow-y-auto">
+            <div className="space-y-1.5">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.id}
+                    to={item.to}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
+                  >
+                    <Icon className="w-4 h-4 text-[#c4975a]" />
+                    <span className="text-sm">{item.label}</span>
+                  </Link>
+                );
+              })}
+              <Link
+                to="/#services"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
+              >
+                <Briefcase className="w-4 h-4 text-[#c4975a]" />
+                <span className="text-sm">All Services</span>
+              </Link>
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-[#e5d9cf]">
+              <p className="text-[10px] text-[#8a7060] uppercase tracking-widest px-4 mb-2">Popular Treatments</p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {treatments.map((t) => {
+                  const TIcon = t.icon;
+                  return (
+                    <Link
+                      key={t.slug}
+                      to={`/treatments/${t.slug}`}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-[#8a7060] hover:text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
+                    >
+                      <TIcon className="w-3.5 h-3.5 text-[#c4975a] flex-shrink-0" strokeWidth={1.5} />
+                      <span className="text-xs leading-tight">{t.title.replace("®", "")}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
             <button
               onClick={() => { openModal(); setMobileOpen(false); }}
-              className="w-full mt-2 bg-[#c4975a] text-white px-6 py-3 rounded-xl text-sm flex items-center justify-center gap-2"
+              className="w-full mt-4 bg-[#c4975a] text-white px-6 py-3 rounded-xl text-sm flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4" />
               Book Now
