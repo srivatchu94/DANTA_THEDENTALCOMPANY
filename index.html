@@ -2,21 +2,94 @@
   <!DOCTYPE html>
   <html lang="en">
     <head>
-      
+
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Redesign Dental Clinic Homepage</title>
-      <meta name="description" content="This web application provides a professional and vibrant design solution for dental clinics, enhancing their online presence and building trust with patients." />
-      <meta name="robots" content="noindex, nofollow" />
+      <title>DANTA – The Dental Company | Advanced Dentistry in Chennai</title>
+      <meta name="description" content="Multi-speciality dental care in Chennai — Smile Designing, Dental Implants, Invisalign®, Root Canal Treatment, Cosmetic Dentistry, Orthodontics, Pediatric Dentistry & more. Advanced, ethical, affordable dentistry for all ages." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://danta-thedentalcompany.vercel.app/" />
+      <link rel="icon" href="/danta-logo.jpg" type="image/jpeg" />
+      <link rel="apple-touch-icon" href="/danta-logo.jpg" />
+
+      <meta property="og:type" content="business.business" />
+      <meta property="og:title" content="DANTA – The Dental Company | Advanced Dentistry in Chennai" />
+      <meta property="og:description" content="Multi-speciality dental care in Chennai — Smile Designing, Dental Implants, Invisalign®, Root Canal Treatment, Cosmetic Dentistry, Orthodontics, Pediatric Dentistry & more." />
+      <meta property="og:url" content="https://danta-thedentalcompany.vercel.app/" />
+      <meta property="og:image" content="https://danta-thedentalcompany.vercel.app/danta-logo.jpg" />
+      <meta property="og:locale" content="en_IN" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="DANTA – The Dental Company | Advanced Dentistry in Chennai" />
+      <meta name="twitter:description" content="Multi-speciality dental care in Chennai — Smile Designing, Dental Implants, Invisalign®, Root Canal Treatment, Cosmetic Dentistry & more." />
+      <meta name="twitter:image" content="https://danta-thedentalcompany.vercel.app/danta-logo.jpg" />
+
       <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
-      
+
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "DANTA – The Dental Company",
+        "alternateName": "Danta Dental Clinic",
+        "image": "https://danta-thedentalcompany.vercel.app/danta-logo.jpg",
+        "url": "https://danta-thedentalcompany.vercel.app/",
+        "telephone": "+91-7395810278",
+        "email": "dantathedentalcompany@gmail.com",
+        "description": "DANTA Dental Clinic is a multi-speciality dental care center offering advanced, ethical, and affordable dentistry for all ages. Our expert team provides comprehensive treatments including Smile Designing, Digital Smile Makeovers, Dental Implants, Full Mouth Rehabilitation, Invisalign & Clear Aligners, Orthodontics, Root Canal Treatment, Cosmetic Dentistry, Veneers, Crowns & Bridges, Teeth Whitening, Laser Dentistry, Gum Therapy, Oral Surgery, Wisdom Tooth Extraction, Pediatric Dentistry, Prosthodontics, Periodontics, Endodontics, and Emergency Dental Care.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "S.No.271/15, 2/387A, First Floor, Sathyavani Muthu Street, Gerugambakkam Main Road",
+          "addressLocality": "Chennai",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "600128",
+          "addressCountry": "IN"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "10:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Sunday"],
+            "description": "By appointment only"
+          }
+        ],
+        "sameAs": ["https://instagram.com/danta.thedentalco"],
+        "medicalSpecialty": ["Dentistry", "Orthodontics", "Periodontics", "Endodontics", "Prosthodontics"],
+        "makesOffer": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Smile Designing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Smile Makeovers" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dental Implants" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full Mouth Rehabilitation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Invisalign & Clear Aligners" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Orthodontics" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Root Canal Treatment" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cosmetic Dentistry" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Veneers" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Crowns & Bridges" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Teeth Whitening" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Laser Dentistry" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gum Therapy" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Oral Surgery" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wisdom Tooth Extraction" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pediatric Dentistry" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Prosthodontics" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Periodontics" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Endodontics" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Emergency Dental Care" } }
+        ]
+      }
+      </script>
+
     </head>
 
     <body>
-      
+
       <div id="root"></div>
       <script type="module" src="/src/main.tsx"></script>
-      
+
     </body>
   </html>
-  

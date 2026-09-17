@@ -1,49 +1,73 @@
-import { Smile, Shield, Sparkles, Scan, Stethoscope, Heart, ArrowRight } from "lucide-react";
+import { Scan, Smile, Sparkles, Shield, Layers, Syringe, Stethoscope, HeartPulse, Scissors, Baby, Zap, Heart, ArrowRight } from "lucide-react";
+
+const ACCENTS = [
+  { accent: "#c4975a", bg: "#fdf8f2" },
+  { accent: "#7c2d3e", bg: "#fdf2f4" },
+  { accent: "#b5a090", bg: "#f9f5f2" },
+];
 
 const services = [
   {
+    icon: Scan,
+    title: "General Dentistry & Diagnostics",
+    description: "Comprehensive checkups, cleanings, preventive care and digital 3D imaging to maintain your oral health.",
+  },
+  {
     icon: Smile,
-    title: "General Dentistry",
-    description: "Comprehensive checkups, cleanings & preventive care to maintain your oral health.",
-    accent: "#c4975a",
-    bg: "#fdf8f2",
+    title: "Smile Designing & Digital Makeovers",
+    description: "Personalized Smile Designing and Digital Smile Makeovers crafted around your unique facial aesthetics.",
   },
   {
     icon: Sparkles,
     title: "Cosmetic Dentistry",
-    description: "Transform your smile with whitening, veneers & advanced aesthetic procedures.",
-    accent: "#7c2d3e",
-    bg: "#fdf2f4",
+    description: "Veneers, Teeth Whitening & advanced aesthetic procedures to transform your smile.",
   },
   {
     icon: Shield,
-    title: "Restorative Care",
-    description: "Dental implants, crowns & bridges to restore both function and beauty.",
-    accent: "#b5a090",
-    bg: "#f9f5f2",
+    title: "Dental Implants & Prosthodontics",
+    description: "Dental Implants, Crowns & Bridges and full Prosthodontics to restore function, form and confidence.",
   },
   {
-    icon: Scan,
-    title: "Digital Imaging",
-    description: "State-of-the-art 3D scanning for precise diagnosis and treatment planning.",
-    accent: "#c4975a",
-    bg: "#fdf8f2",
+    icon: Layers,
+    title: "Full Mouth Rehabilitation",
+    description: "Comprehensive, multi-treatment rehabilitation that rebuilds a fully healthy, functional smile.",
+  },
+  {
+    icon: Syringe,
+    title: "Root Canal & Endodontics",
+    description: "Painless Root Canal Treatment and advanced Endodontics to save and protect your natural teeth.",
   },
   {
     icon: Stethoscope,
-    title: "Orthodontics",
-    description: "Braces and clear aligners to perfectly align your teeth and bite.",
-    accent: "#7c2d3e",
-    bg: "#fdf2f4",
+    title: "Orthodontics & Invisalign®",
+    description: "Braces, Invisalign® & Clear Aligners to perfectly align your teeth and bite.",
+  },
+  {
+    icon: HeartPulse,
+    title: "Gum Care & Periodontics",
+    description: "Gentle Gum Therapy and Periodontics to treat gum disease and protect your long-term oral health.",
+  },
+  {
+    icon: Scissors,
+    title: "Oral Surgery & Extractions",
+    description: "Safe, comfortable Oral Surgery including Wisdom Tooth Extraction and other surgical care.",
+  },
+  {
+    icon: Baby,
+    title: "Pediatric Dentistry",
+    description: "Gentle, friendly dental care designed especially for children and growing smiles.",
+  },
+  {
+    icon: Zap,
+    title: "Laser Dentistry",
+    description: "Advanced, minimally-invasive laser treatments for greater comfort, precision and faster healing.",
   },
   {
     icon: Heart,
-    title: "Emergency Care",
+    title: "Emergency Dental Care",
     description: "Same-day urgent appointments for dental emergencies and pain relief.",
-    accent: "#b5a090",
-    bg: "#f9f5f2",
   },
-];
+].map((service, index) => ({ ...service, ...ACCENTS[index % ACCENTS.length] }));
 
 export function Services() {
   return (
