@@ -81,7 +81,7 @@ export function Footer() {
               Our Services
             </h4>
             <ul className="space-y-2.5">
-              {treatments.map((t) => (
+              {treatments.slice(0, 7).map((t) => (
                 <li key={t.slug}>
                   <Link to={`/treatments/${t.slug}`} className="text-[#8a7060] hover:text-[#c4975a] transition-colors text-sm flex items-center gap-2 group">
                     <span className="w-1 h-1 bg-[#7c2d3e]/40 rounded-full group-hover:bg-[#c4975a] transition-colors" />
@@ -90,9 +90,9 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link to="/#services" className="text-[#c4975a] hover:text-[#e8c98a] transition-colors text-sm flex items-center gap-2 group">
+                <Link to="/services" className="text-[#c4975a] hover:text-[#e8c98a] transition-colors text-sm flex items-center gap-2 group">
                   <span className="w-1 h-1 bg-[#c4975a] rounded-full" />
-                  View All Services
+                  View All {treatments.length} Services
                 </Link>
               </li>
             </ul>

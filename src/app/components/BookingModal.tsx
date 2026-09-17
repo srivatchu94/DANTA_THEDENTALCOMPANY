@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { User, Phone, Stethoscope, Send, CheckCircle2, X, AlertCircle } from "lucide-react";
+import { User, Phone, Stethoscope, Send, CheckCircle2, X, AlertCircle, ArrowRight } from "lucide-react";
 import {
   Dialog,
   DialogPortal,
@@ -84,7 +84,7 @@ export function BookingModal() {
                 Let&apos;s Get You <span className="italic text-[#c4975a]">Scheduled</span>
               </DialogPrimitive.Title>
               <DialogPrimitive.Description className="text-[#8a7060] text-sm mt-1.5">
-                Share a few details and our team will personally reach out to book your appointment.
+                For enquiries, share your details below — or call us directly for immediate assistance.
               </DialogPrimitive.Description>
             </div>
             <DialogClose className="w-9 h-9 flex-shrink-0 rounded-xl border border-[#e5d9cf] flex items-center justify-center text-[#8a7060] hover:text-[#2a1f1a] hover:border-[#c4975a]/50 transition-all duration-200">
@@ -92,6 +92,37 @@ export function BookingModal() {
               <span className="sr-only">Close</span>
             </DialogClose>
           </div>
+
+          {status !== "sent" && (
+            <div className="px-7 pt-5">
+              <a
+                href={CONTACT_PHONE_TEL}
+                className="group flex items-center justify-between gap-4 bg-[#7c2d3e]/8 border border-[#7c2d3e]/25 hover:border-[#7c2d3e]/45 hover:bg-[#7c2d3e]/12 rounded-xl pl-4 pr-5 py-3.5 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="relative w-11 h-11 rounded-full bg-[#7c2d3e] flex items-center justify-center flex-shrink-0 shadow-md">
+                    <Phone className="w-5 h-5 text-white" />
+                    <span className="absolute inset-0 rounded-full bg-[#7c2d3e] animate-ping opacity-30 pointer-events-none" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-[#7c2d3e] uppercase tracking-widest font-semibold mb-0.5">
+                      Prefer to talk right away?
+                    </p>
+                    <p className="text-lg text-[#2a1f1a] font-extrabold tracking-wide group-hover:text-[#7c2d3e] transition-colors">
+                      {CONTACT_PHONE_DISPLAY}
+                    </p>
+                  </div>
+                </div>
+                <ArrowRight className="w-4 h-4 text-[#7c2d3e] flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+
+              <div className="flex items-center gap-3 mt-5">
+                <div className="h-px flex-1 bg-[#e5d9cf]" />
+                <span className="text-[10px] text-[#b5a090] uppercase tracking-widest">Or send us your details</span>
+                <div className="h-px flex-1 bg-[#e5d9cf]" />
+              </div>
+            </div>
+          )}
 
           {status === "sent" ? (
             <div className="flex flex-col items-center justify-center gap-4 py-16 px-8">
@@ -106,7 +137,7 @@ export function BookingModal() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-7 space-y-5">
+            <form onSubmit={handleSubmit} className="px-7 pt-5 pb-7 space-y-5">
               <div className="flex flex-col gap-2">
                 <label className="text-xs text-[#8a7060] tracking-widest uppercase flex items-center gap-2">
                   <User className="w-3.5 h-3.5 text-[#c4975a]" />

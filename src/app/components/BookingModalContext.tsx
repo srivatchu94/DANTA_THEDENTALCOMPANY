@@ -1,5 +1,6 @@
 "use client";
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 type BookingModalContextValue = {
   isOpen: boolean;
@@ -9,17 +10,32 @@ type BookingModalContextValue = {
 
 const BookingModalContext = createContext<BookingModalContextValue | null>(null);
 
+const BOOKING_HASH = "#book-appointment";
+
 export function BookingModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const openModal = useCallback(() => {
+    setIsOpen(true);
+    if (location.hash !== BOOKING_HASH) {
+      navigate(
+        { pathname: location.pathname, search: location.search, hash: "book-appointment" },
+        { replace: false }
+      );
+    }
+  }, [navigate, location.pathname, location.search, location.hash]);
+
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+    if (location.hash === BOOKING_HASH) {
+      navigate({ pathname: location.pathname, search: location.search }, { replace: true });
+    }
+  }, [navigate, location.pathname, location.search, location.hash]);
 
   return (
-    <BookingModalContext.Provider
-      value={{
-        isOpen,
-        openModal: () => setIsOpen(true),
-        closeModal: () => setIsOpen(false),
-      }}
-    >
+    <BookingModalContext.Provider value={{ isOpen, openModal, closeModal }}>
       {children}
     </BookingModalContext.Provider>
   );

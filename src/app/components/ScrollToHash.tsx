@@ -1,11 +1,12 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useBookingModal } from "./BookingModalContext";
 
 export function ScrollToHash() {
   const location = useLocation();
   const { openModal } = useBookingModal();
+  const prevPathname = useRef(location.pathname);
 
   useEffect(() => {
     if (location.hash === "#book-appointment") {
@@ -13,8 +14,15 @@ export function ScrollToHash() {
       return;
     }
 
+    const pathnameChanged = prevPathname.current !== location.pathname;
+    prevPathname.current = location.pathname;
+
     if (!location.hash) {
-      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      // Only reset scroll on an actual page change — clearing the hash on the
+      // same page (e.g. closing the booking modal) shouldn't jump the user.
+      if (pathnameChanged) {
+        window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      }
       return;
     }
 

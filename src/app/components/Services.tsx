@@ -12,6 +12,7 @@ const services = [
     icon: Scan,
     title: "General Dentistry & Diagnostics",
     description: "Comprehensive checkups, cleanings, preventive care and digital 3D imaging to maintain your oral health.",
+    link: "/treatments/general-dentistry",
   },
   {
     icon: Smile,
@@ -23,7 +24,7 @@ const services = [
     icon: Sparkles,
     title: "Cosmetic Dentistry",
     description: "Veneers, Teeth Whitening & advanced aesthetic procedures to transform your smile.",
-    link: "/treatments/teeth-whitening",
+    link: "/treatments/cosmetic-dentistry",
   },
   {
     icon: Shield,
@@ -47,33 +48,37 @@ const services = [
     icon: Stethoscope,
     title: "Orthodontics & Invisalign®",
     description: "Braces, Invisalign® & Clear Aligners to perfectly align your teeth and bite.",
-    link: "/treatments/invisalign-clear-aligners",
+    link: "/treatments/orthodontics",
   },
   {
     icon: HeartPulse,
     title: "Gum Care & Periodontics",
     description: "Gentle Gum Therapy and Periodontics to treat gum disease and protect your long-term oral health.",
+    link: "/treatments/periodontics",
   },
   {
     icon: Scissors,
     title: "Oral Surgery & Extractions",
     description: "Safe, comfortable Oral Surgery including Wisdom Tooth Extraction and other surgical care.",
-    link: "/treatments/wisdom-tooth-extraction",
+    link: "/treatments/oral-surgery",
   },
   {
     icon: Baby,
     title: "Pediatric Dentistry",
     description: "Gentle, friendly dental care designed especially for children and growing smiles.",
+    link: "/treatments/pediatric-dentistry",
   },
   {
     icon: Zap,
     title: "Laser Dentistry",
     description: "Advanced, minimally-invasive laser treatments for greater comfort, precision and faster healing.",
+    link: "/treatments/laser-dentistry",
   },
   {
     icon: Heart,
     title: "Emergency Dental Care",
     description: "Same-day urgent appointments for dental emergencies and pain relief.",
+    link: "/treatments/emergency-dental-care",
   },
 ].map((service, index) => ({ ...service, ...ACCENTS[index % ACCENTS.length] }));
 
@@ -104,7 +109,7 @@ export function Services() {
         {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
-              <Link key={index} to={service.link ?? "/#contact"} className="group relative block">
+              <Link key={index} to={service.link} className="group relative block">
                 <div
                   className="relative h-full rounded-2xl p-8 border border-[#e5d9cf] hover:border-transparent hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden"
                   style={{ backgroundColor: service.bg }}
@@ -133,7 +138,7 @@ export function Services() {
                   <p className="text-sm text-[#8a7060] leading-relaxed mb-6">{service.description}</p>
 
                   <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300" style={{ color: service.accent }}>
-                    <span>{service.link ? "Learn More" : "Ask Us"}</span>
+                    <span>Learn More</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
                   </span>
 
@@ -150,10 +155,10 @@ export function Services() {
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <p className="text-[#8a7060] text-sm mb-5">Explore our full range of specialized treatments</p>
-          <button className="group bg-[#2a1f1a] text-[#d4b896] px-9 py-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] flex items-center gap-3 mx-auto">
+          <Link to="/services" className="group bg-[#2a1f1a] text-[#d4b896] px-9 py-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] inline-flex items-center gap-3">
             <span className="text-sm tracking-wide">View All Services</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
+          </Link>
         </div>
       </div>
 

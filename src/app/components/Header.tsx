@@ -43,7 +43,7 @@ export function Header() {
     { id: "contact", label: "Contact", icon: MessageCircle, to: "/#contact" },
   ];
 
-  const isTreatmentActive = location.pathname.startsWith("/treatments/");
+  const isTreatmentActive = location.pathname.startsWith("/treatments/") || location.pathname === "/services";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -207,11 +207,11 @@ export function Header() {
                     >
                       <DropdownMenuPrimitive.Item asChild className="outline-none">
                         <Link
-                          to="/#services"
+                          to="/services"
                           className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl text-sm text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors mb-1.5 group"
                           style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}
                         >
-                          <span>All Services</span>
+                          <span>View All {treatments.length} Services</span>
                           <ArrowRight className="w-3.5 h-3.5 text-[#c4975a] group-hover:translate-x-0.5 transition-transform" />
                         </Link>
                       </DropdownMenuPrimitive.Item>
@@ -323,17 +323,17 @@ export function Header() {
                 );
               })}
               <Link
-                to="/#services"
+                to="/services"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#2a1f1a] hover:bg-[#f3ece4] transition-colors"
               >
                 <Briefcase className="w-4 h-4 text-[#c4975a]" />
-                <span className="text-sm">All Services</span>
+                <span className="text-sm">View All {treatments.length} Services</span>
               </Link>
             </div>
 
             <div className="mt-4 pt-4 border-t border-[#e5d9cf]">
-              <p className="text-[10px] text-[#8a7060] uppercase tracking-widest px-4 mb-2">Popular Treatments</p>
+              <p className="text-[10px] text-[#8a7060] uppercase tracking-widest px-4 mb-2">All Treatments</p>
               <div className="grid grid-cols-2 gap-1.5">
                 {treatments.map((t) => {
                   const TIcon = t.icon;

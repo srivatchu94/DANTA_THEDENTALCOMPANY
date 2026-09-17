@@ -6,12 +6,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://danta-thedentalcompany.vercel.app/treatments/dental-implants</loc>
+    <loc>https://danta-thedentalcompany.vercel.app/services</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://danta-thedentalcompany.vercel.app/treatments/invisalign-clear-aligners</loc>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/general-dentistry</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -21,7 +21,47 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/digital-smile-makeovers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/dental-implants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/full-mouth-rehabilitation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/invisalign-clear-aligners</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/orthodontics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://danta-thedentalcompany.vercel.app/treatments/root-canal-treatment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/cosmetic-dentistry</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/veneers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/crowns-bridges</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -31,12 +71,47 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/laser-dentistry</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/gum-therapy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/oral-surgery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://danta-thedentalcompany.vercel.app/treatments/wisdom-tooth-extraction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://danta-thedentalcompany.vercel.app/treatments/full-mouth-rehabilitation</loc>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/pediatric-dentistry</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/prosthodontics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/periodontics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/endodontics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danta-thedentalcompany.vercel.app/treatments/emergency-dental-care</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

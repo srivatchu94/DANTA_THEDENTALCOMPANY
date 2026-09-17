@@ -6,6 +6,7 @@ import { BookingModal } from "./components/BookingModal";
 import { ScrollToHash } from "./components/ScrollToHash";
 import Home from "./pages/Home";
 import TreatmentPage from "./pages/TreatmentPage";
+import AllServices from "./pages/AllServices";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <ScrollToHash />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/services" element={<AllServices />} />
             <Route path="/treatments/:slug" element={<TreatmentPage />} />
           </Routes>
           <Footer />
