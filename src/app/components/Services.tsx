@@ -1,5 +1,12 @@
 import { Scan, Smile, Sparkles, Shield, Layers, Syringe, Stethoscope, HeartPulse, Scissors, Baby, Zap, Heart, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { treatments } from "../data/treatments";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+
+function imageForLink(link: string): string {
+  const slug = link.replace("/treatments/", "");
+  return treatments.find((t) => t.slug === slug)?.image ?? "";
+}
 
 const ACCENTS = [
   { accent: "#c4975a", bg: "#fdf8f2" },
@@ -111,42 +118,41 @@ export function Services() {
           {services.map((service, index) => (
               <Link key={index} to={service.link} className="group relative block">
                 <div
-                  className="relative h-full rounded-2xl p-8 border border-[#e5d9cf] hover:border-transparent hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden"
+                  className="relative h-full rounded-2xl border border-[#e5d9cf] hover:border-transparent hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden"
                   style={{ backgroundColor: service.bg }}
                 >
                   {/* Hover glow layer */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl z-10 pointer-events-none"
                     style={{ boxShadow: `inset 0 0 0 1.5px ${service.accent}40` }}
                   />
-                  {/* Shimmer */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl" />
 
-                  {/* Icon */}
-                  <div className="mb-6">
+                  {/* Image with icon badge */}
+                  <div className="relative h-44 overflow-hidden">
+                    <ImageWithFallback
+                      src={imageForLink(service.link)}
+                      alt={service.title.replace("®", "")}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                     <div
-                      className="w-14 h-14 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-400"
-                      style={{ backgroundColor: `${service.accent}15`, border: `1.5px solid ${service.accent}30` }}
+                      className="absolute bottom-0 left-0 w-12 h-12 rounded-tr-xl flex items-center justify-center"
+                      style={{ backgroundColor: service.bg }}
                     >
-                      <service.icon className="w-7 h-7" style={{ color: service.accent }} strokeWidth={1.5} />
+                      <service.icon className="w-6 h-6" style={{ color: service.accent }} strokeWidth={1.5} />
                     </div>
                   </div>
 
-                  <h3 className="text-xl mb-3 text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-[#8a7060] leading-relaxed mb-6">{service.description}</p>
+                  <div className="p-8 pt-6">
+                    <h3 className="text-xl mb-3 text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-[#8a7060] leading-relaxed mb-6">{service.description}</p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300" style={{ color: service.accent }}>
-                    <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
-                  </span>
-
-                  {/* Decorative corner shape */}
-                  <div
-                    className="absolute top-0 right-0 w-20 h-20 rounded-bl-[60px] rounded-tr-2xl opacity-5 group-hover:opacity-10 transition-opacity"
-                    style={{ backgroundColor: service.accent }}
-                  />
+                    <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300" style={{ color: service.accent }}>
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+                    </span>
+                  </div>
                 </div>
               </Link>
           ))}
