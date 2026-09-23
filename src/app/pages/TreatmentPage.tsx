@@ -3,6 +3,7 @@ import { Calendar, CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import { treatments, getTreatmentBySlug } from "../data/treatments";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { useBookingModal } from "../components/BookingModalContext";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 export default function TreatmentPage() {
   const { slug } = useParams();
@@ -53,6 +54,18 @@ export default function TreatmentPage() {
               {treatment.title}
             </h1>
             <p className="text-lg text-[#c4975a] italic">{treatment.tagline}</p>
+          </div>
+        </div>
+
+        {/* Treatment image */}
+        <div className="relative mb-8">
+          <div className="absolute -inset-1 rounded-[1.75rem] bg-gradient-to-br from-[#c4975a] via-[#d4b896] to-[#c4975a] opacity-30 blur-sm pointer-events-none" />
+          <div className="relative rounded-3xl overflow-hidden border border-[#e5d9cf] shadow-xl">
+            <ImageWithFallback
+              src={treatment.image}
+              alt={`${treatment.title.replace("®", "")} treatment at Danta – The Dental Company`}
+              className="w-full h-64 md:h-96 object-cover"
+            />
           </div>
         </div>
 
@@ -121,16 +134,25 @@ export default function TreatmentPage() {
                 <Link
                   key={t.slug}
                   to={`/treatments/${t.slug}`}
-                  className="group bg-white rounded-xl border border-[#e5d9cf] hover:border-[#c4975a]/50 hover:shadow-md transition-all duration-300 p-5"
+                  className="group bg-white rounded-xl border border-[#e5d9cf] hover:border-[#c4975a]/50 hover:shadow-md transition-all duration-300 overflow-hidden"
                 >
-                  <RelIcon className="w-5 h-5 text-[#c4975a] mb-3" strokeWidth={1.5} />
-                  <p className="text-sm text-[#2a1f1a] mb-1" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
-                    {t.title}
-                  </p>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-[#8a7060] group-hover:text-[#c4975a] transition-colors">
-                    Learn more
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
-                  </span>
+                  <div className="h-28 overflow-hidden">
+                    <ImageWithFallback
+                      src={t.image}
+                      alt={t.title.replace("®", "")}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <RelIcon className="w-5 h-5 text-[#c4975a] mb-3" strokeWidth={1.5} />
+                    <p className="text-sm text-[#2a1f1a] mb-1" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
+                      {t.title}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-[#8a7060] group-hover:text-[#c4975a] transition-colors">
+                      Learn more
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
+                    </span>
+                  </div>
                 </Link>
               );
             })}

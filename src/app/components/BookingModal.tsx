@@ -13,6 +13,26 @@ import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL } from "./contact-info";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 
+// Letters, spaces, and the handful of marks real names actually use
+// (apostrophes for names like O'Brien, hyphens for hyphenated names).
+// Blocking everything else keeps angle brackets, braces, quotes etc. out of
+// a field that ends up rendered in an email — cheap insurance against
+// injection attempts, not just typo prevention.
+const NAME_ALLOWED = /[^A-Za-z\s.'-]/g;
+const NAME_VALID = /^[A-Za-z][A-Za-z\s.'-]{1,49}$/;
+
+// Indian mobile numbers are exactly 10 digits — strip anything that isn't a
+// digit as the user types so the field can never hold letters or symbols.
+const PHONE_ALLOWED = /[^\d]/g;
+const PHONE_VALID = /^\d{10}$/;
+
+// Letters, numbers, everyday punctuation only. This is a free-text symptom
+// description, but it never needs to contain <, >, {, }, ;, `, $ etc. —
+// characters commonly used to smuggle scripts or markup through a form —
+// so they're filtered out rather than merely rejected on submit.
+const PROBLEM_ALLOWED = /[^A-Za-z0-9\s.,!?'"()-]/g;
+const PROBLEM_VALID = /^[A-Za-z0-9\s.,!?'"()-]{3,500}$/;
+
 export function BookingModal() {
   const { isOpen, closeModal } = useBookingModal();
 
@@ -20,6 +40,11 @@ export function BookingModal() {
   const [phone, setPhone] = useState("");
   const [problem, setProblem] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+
+  const nameValid = NAME_VALID.test(name.trim());
+  const phoneValid = PHONE_VALID.test(phone.trim());
+  const problemValid = PROBLEM_VALID.test(problem.trim());
+  const formValid = nameValid && phoneValid && problemValid;
 
   function reset() {
     setName("");
@@ -37,7 +62,9 @@ export function BookingModal() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !phone.trim() || !problem.trim()) return;
+    // Re-check on submit even though inputs are already filtered live —
+    // belt-and-suspenders in case a value was set programmatically.
+    if (!formValid) return;
 
     setStatus("submitting");
 
@@ -146,8 +173,9 @@ export function BookingModal() {
                 <input
                   type="text"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setName(e.target.value.replace(NAME_ALLOWED, ""))}
                   placeholder="e.g. Priya Sundaram"
+                  maxLength={50}
                   required
                   className="bg-white border border-[#e5d9cf] focus:border-[#c4975a] rounded-xl px-4 py-3 text-sm text-[#2a1f1a] placeholder-[#b5a090] outline-none transition-colors duration-200"
                 />
@@ -160,12 +188,17 @@ export function BookingModal() {
                 </label>
                 <input
                   type="tel"
+                  inputMode="numeric"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="e.g. 98765 43210"
+                  onChange={(e) => setPhone(e.target.value.replace(PHONE_ALLOWED, "").slice(0, 10))}
+                  placeholder="e.g. 9876543210"
+                  maxLength={10}
                   required
                   className="bg-white border border-[#e5d9cf] focus:border-[#c4975a] rounded-xl px-4 py-3 text-sm text-[#2a1f1a] placeholder-[#b5a090] outline-none transition-colors duration-200"
                 />
+                {phone.length > 0 && !phoneValid && (
+                  <span className="text-[11px] text-[#7c2d3e]">Enter a valid 10-digit mobile number</span>
+                )}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -175,8 +208,9 @@ export function BookingModal() {
                 </label>
                 <textarea
                   value={problem}
-                  onChange={(e) => setProblem(e.target.value)}
+                  onChange={(e) => setProblem(e.target.value.replace(PROBLEM_ALLOWED, ""))}
                   placeholder="Tell us briefly what's troubling you…"
+                  maxLength={500}
                   required
                   rows={3}
                   className="bg-white border border-[#e5d9cf] focus:border-[#c4975a] rounded-xl px-4 py-3 text-sm text-[#2a1f1a] placeholder-[#b5a090] outline-none transition-colors duration-200 resize-none"
@@ -198,7 +232,7 @@ export function BookingModal() {
 
               <button
                 type="submit"
-                disabled={!name.trim() || !phone.trim() || !problem.trim() || status === "submitting"}
+                disabled={!formValid || status === "submitting"}
                 className="group relative w-full overflow-hidden bg-[#c4975a] disabled:opacity-40 disabled:cursor-not-allowed text-white px-8 py-3.5 rounded-xl shadow-md hover:shadow-[#c4975a]/30 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] flex items-center justify-center gap-2.5"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#b8844a] to-[#d4a86a] opacity-0 group-hover:opacity-100 transition-opacity" />

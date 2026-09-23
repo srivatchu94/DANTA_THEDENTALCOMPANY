@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { treatments } from "../data/treatments";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 const ACCENTS = [
   { accent: "#c4975a", bg: "#fdf8f2" },
@@ -47,29 +48,36 @@ export default function AllServices() {
             return (
               <Link key={t.slug} to={`/treatments/${t.slug}`} className="group relative block">
                 <div
-                  className="relative h-full rounded-2xl p-7 border border-[#e5d9cf] hover:border-transparent hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5 cursor-pointer overflow-hidden"
+                  className="relative h-full rounded-2xl border border-[#e5d9cf] hover:border-transparent hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5 cursor-pointer overflow-hidden"
                   style={{ backgroundColor: bg }}
                 >
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl z-10 pointer-events-none"
                     style={{ boxShadow: `inset 0 0 0 1.5px ${accent}40` }}
                   />
-                  <div className="mb-5">
+                  <div className="relative h-36 overflow-hidden">
+                    <ImageWithFallback
+                      src={t.image}
+                      alt={t.title.replace("®", "")}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-all duration-400"
-                      style={{ backgroundColor: `${accent}15`, border: `1.5px solid ${accent}30` }}
+                      className="absolute bottom-0 left-0 w-11 h-11 rounded-tr-xl flex items-center justify-center"
+                      style={{ backgroundColor: bg }}
                     >
-                      <Icon className="w-6 h-6" style={{ color: accent }} strokeWidth={1.5} />
+                      <Icon className="w-5 h-5" style={{ color: accent }} strokeWidth={1.5} />
                     </div>
                   </div>
-                  <h3 className="text-lg mb-2 text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
-                    {t.title}
-                  </h3>
-                  <p className="text-sm text-[#8a7060] leading-relaxed mb-5">{t.tagline}</p>
-                  <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300" style={{ color: accent }}>
-                    <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
-                  </span>
+                  <div className="p-7 pt-5">
+                    <h3 className="text-lg mb-2 text-[#2a1f1a]" style={{ fontFamily: "var(--font-heading)", fontWeight: 600 }}>
+                      {t.title}
+                    </h3>
+                    <p className="text-sm text-[#8a7060] leading-relaxed mb-5">{t.tagline}</p>
+                    <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300" style={{ color: accent }}>
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+                    </span>
+                  </div>
                 </div>
               </Link>
             );

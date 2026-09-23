@@ -3,6 +3,14 @@ import { Resend } from "resend";
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || "dantathedentalcompany@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Danta Website <onboarding@resend.dev>";
 
+// The client already filters these fields as the user types, but that's UX
+// only — anyone can POST to this endpoint directly, bypassing the browser
+// entirely. These patterns are the real security boundary: reject anything
+// that doesn't match before it ever reaches the email body.
+const NAME_VALID = /^[A-Za-z][A-Za-z\s.'-]{1,49}$/;
+const PHONE_VALID = /^\d{10}$/;
+const PROBLEM_VALID = /^[A-Za-z0-9\s.,!?'"()-]{3,500}$/;
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -13,6 +21,15 @@ export default async function handler(req, res) {
 
   if (!name || !phone || !problem) {
     res.status(400).json({ error: "Missing required fields" });
+    return;
+  }
+
+  const trimmedName = String(name).trim();
+  const trimmedPhone = String(phone).trim();
+  const trimmedProblem = String(problem).trim();
+
+  if (!NAME_VALID.test(trimmedName) || !PHONE_VALID.test(trimmedPhone) || !PROBLEM_VALID.test(trimmedProblem)) {
+    res.status(400).json({ error: "Invalid input" });
     return;
   }
 
