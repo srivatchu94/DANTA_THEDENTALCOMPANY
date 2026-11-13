@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install *)",
+      "PowerShell(npm install -g pnpm 2>&1)",
+      "PowerShell(cd \"c:\\\\Users\\\\srivatsan\\\\Downloads\\\\DANTA - THE DENTAL COMPANY\"; Start-Process powershell -ArgumentList \"-NoProfile -NoExit -Command `\"cd 'c:\\\\Users\\\\srivatsan\\\\Downloads\\\\DANTA - THE DENTAL COMPANY'; pnpm dev`\"\"; Start-Sleep -Seconds 4; Write-Host \"Dev server launched\")"
+    ]
+  }
+}
